@@ -17,7 +17,8 @@ public class Artist {
 
     @Column(name = "alias")
     private String alias;
-
+    @Column ( name = "is_deleted", nullable = false, columnDefinition = "BOOLEAN NOT NULL DEFAULT false")
+    private boolean isDeleted;
     @OneToMany(mappedBy = "artist")
     private List<Song> songs;
 
@@ -51,5 +52,13 @@ public class Artist {
 
     public void setSongs(List<Song> songs) {
         this.songs = songs;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }

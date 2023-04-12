@@ -6,6 +6,8 @@ public class ArtistDTO {
     private String name;
     private String alias;
 
+    private boolean isDeleted;
+
     public long getId() {
         return id;
     }
@@ -28,5 +30,13 @@ public class ArtistDTO {
 
     public void setAlias(String alias) {
         this.alias = alias;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }

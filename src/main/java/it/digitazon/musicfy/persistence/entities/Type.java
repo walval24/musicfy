@@ -15,6 +15,8 @@ public class Type {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column ( name = "is_deleted", nullable = false, columnDefinition = "BOOLEAN NOT NULL DEFAULT false")
+private boolean isDeleted;
     @OneToMany(mappedBy = "type") // riferisce a riga 25 della tab songs
     private List<Song> songs;
 
@@ -40,5 +42,13 @@ public class Type {
 
     public void setSongs(List<Song> songs) {
         this.songs = songs;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }

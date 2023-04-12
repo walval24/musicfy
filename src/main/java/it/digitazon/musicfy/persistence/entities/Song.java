@@ -1,6 +1,8 @@
 package it.digitazon.musicfy.persistence.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "songs")
@@ -16,12 +18,19 @@ public class Song {
     @Column(name = "duration")
     private Integer duration;
 
-    @ManyToOne
+    @Column ( name = "is_deleted", nullable = false, columnDefinition = "BOOLEAN NOT NULL DEFAULT false")
+    private boolean isDeleted;
+
+    @Column ( name = "price", nullable = false,columnDefinition = "DECIMAL(5,2) NOT NULL DEFAULT 0.0")
+    private double price;
+    @ManyToOne()
     @JoinColumn(name = "id_artist", nullable = false)
+    //@OnDelete(action= OnDeleteAction.CASCADE)
     private Artist artist;
 
     @ManyToOne
     @JoinColumn(name = "id_type",nullable = false)
+   // @OnDelete(action= OnDeleteAction.CASCADE)
     private Type type;
 
     public long getId() {
@@ -62,5 +71,21 @@ public class Song {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
