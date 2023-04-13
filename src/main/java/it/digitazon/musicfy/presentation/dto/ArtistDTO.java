@@ -53,9 +53,15 @@ public class ArtistDTO {
         this.birthDate = birthDate;
     }
 
-    public Date convertBirthDate() throws ParseException {
-
-        return dateFormat.parse(this.birthDate);
+    public Date convertBirthDate() {
+if (this.birthDate == null || this.birthDate.length() == 0){
+    return null;
+}
+        try {
+            return dateFormat.parse(this.birthDate);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

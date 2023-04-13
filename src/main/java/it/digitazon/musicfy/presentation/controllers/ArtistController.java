@@ -72,14 +72,8 @@ public class ArtistController {
     }
 
     private Artist convertToEntity(ArtistDTO dto) {
-        Artist entity = modelMapper.map(dto, Artist.class);
-        try {
-            entity.setBirthDate(dto.convertBirthDate());
-        } catch (ParseException e) {
-            throw new IllegalStateException("Date cannot be parsed");
-        }
+        return modelMapper.map(dto, Artist.class);
 
-        return entity;
     }
 
     private SongDTO convertToSongDTO(Song song) {
