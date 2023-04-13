@@ -68,12 +68,7 @@ public class ArtistController {
      }
 
     private ArtistDTO convertToDTO(Artist artist) {
-        ArtistDTO dto = modelMapper.map(artist, ArtistDTO.class);
-
-            dto.convertDateToString(artist.getBirthDate());
-
-
-        return dto;
+        return modelMapper.map(artist, ArtistDTO.class);
     }
 
     private Artist convertToEntity(ArtistDTO dto) {
@@ -88,11 +83,7 @@ public class ArtistController {
     }
 
     private SongDTO convertToSongDTO(Song song) {
-        SongDTO dto = modelMapper.map(song, SongDTO.class);
-        dto.setIdArtist(song.getArtist().getId());
-        dto.setIdType(song.getType().getId());
-
-        return dto;
+        return modelMapper.map(song, SongDTO.class);
     }
 
 }

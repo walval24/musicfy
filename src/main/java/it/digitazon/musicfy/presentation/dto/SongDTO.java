@@ -69,4 +69,12 @@ public class SongDTO {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public Date getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(Date publishDate) {
+        this.publishDate = publishDate;
+    }
 }

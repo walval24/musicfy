@@ -83,11 +83,8 @@ public ArtistDTO getArtist (@PathVariable long id) {
 
 
     private SongDTO convertToDTO(Song song){
-        SongDTO dto = modelMapper.map(song, SongDTO.class);
-        dto.setIdType(song.getType().getId());
-        dto.setIdArtist(song.getArtist().getId());
+        return modelMapper.map(song, SongDTO.class);
 
-        return dto;
     }
 
     private Song convertToEntity(SongDTO dto){
