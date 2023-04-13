@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -67,11 +68,23 @@ public class ArtistController {
      }
 
     private ArtistDTO convertToDTO(Artist artist) {
-        return modelMapper.map(artist, ArtistDTO.class);
+        ArtistDTO dto = modelMapper.map(artist, ArtistDTO.class);
+
+            dto.convertDateToString(artist.getBirthDate());
+
+
+        return dto;
     }
 
     private Artist convertToEntity(ArtistDTO dto) {
-        return modelMapper.map(dto, Artist.class);
+        Artist entity = modelMapper.map(dto, Artist.class);
+        try {
+            entity.setBirthDate(dto.convertBirthDate());
+        } catch (ParseException e) {
+            throw new IllegalStateException("Date cannot be parsed");
+        }
+
+        return entity;
     }
 
     private SongDTO convertToSongDTO(Song song) {

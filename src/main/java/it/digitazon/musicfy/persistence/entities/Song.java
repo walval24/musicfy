@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "songs")
 public class Song {
@@ -23,6 +25,8 @@ public class Song {
 
     @Column ( name = "price", nullable = false,columnDefinition = "DECIMAL(5,2) NOT NULL DEFAULT 0.0")
     private double price;
+    @Column( name = "publish_date" )
+    private Date publishDate;
     @ManyToOne()
     @JoinColumn(name = "id_artist", nullable = false)
     //@OnDelete(action= OnDeleteAction.CASCADE)
@@ -87,5 +91,13 @@ public class Song {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Date getPublishDate() {
+        return publishDate;
+    }
+
+    public void setPublishDate(Date publishDate) {
+        this.publishDate = publishDate;
     }
 }

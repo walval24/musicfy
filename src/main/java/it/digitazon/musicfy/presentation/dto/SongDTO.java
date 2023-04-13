@@ -1,5 +1,7 @@
 package it.digitazon.musicfy.presentation.dto;
 
+import java.util.Date;
+
 public class SongDTO {
 
     private long id;
@@ -9,6 +11,8 @@ public class SongDTO {
     private long idType;
     private boolean isDeleted;
     private double price;
+
+    private Date publishDate;
 
     public long getId() {
         return id;

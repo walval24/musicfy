@@ -2,6 +2,7 @@ package it.digitazon.musicfy.persistence.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -11,14 +12,14 @@ public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     @Column(name = "name", nullable = false)
     private String name;
-
     @Column(name = "alias")
     private String alias;
     @Column ( name = "is_deleted", nullable = false, columnDefinition = "BOOLEAN NOT NULL DEFAULT false")
     private boolean isDeleted;
+    @Column(name = "birth_date")
+    private Date birthDate;
     @OneToMany(mappedBy = "artist")
     private List<Song> songs;
 
@@ -60,5 +61,13 @@ public class Artist {
 
     public void setDeleted(boolean deleted) {
         isDeleted = deleted;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 }
