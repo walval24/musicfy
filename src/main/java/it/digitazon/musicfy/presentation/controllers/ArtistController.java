@@ -5,6 +5,7 @@ import it.digitazon.musicfy.persistence.entities.Song;
 import it.digitazon.musicfy.presentation.dto.ArtistDTO;
 import it.digitazon.musicfy.presentation.dto.SongDTO;
 import it.digitazon.musicfy.services.ArtistService;
+import it.digitazon.musicfy.services.SongService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +15,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/artists")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ArtistController {
 
     @Autowired
     private ArtistService artistService;
+    @Autowired
+    private SongService songService;
     @Autowired
     private ModelMapper modelMapper;
 
@@ -46,16 +50,28 @@ public class ArtistController {
 
     @PutMapping("/{id}")
     public ArtistDTO updateArtist(@PathVariable long id, @RequestBody ArtistDTO updateArtist) {
-        Artist artist = convertToEntity(updateArtist);
+        Artist artist = artistService.getById(id);
 
-        artist = artistService.update(id, artist);
+        artist.getSongs()
 
-        return convertToDTO(artist);
+                .forEach(song -> songService.delete(song.getId()));
+
+
+        return convertToDTO(artistService.delete(id));
     }
      @DeleteMapping ("/{id}")
      public ArtistDTO deleteArtist(@PathVariable long id){
         return convertToDTO(artistService.delete(id));
      }
+
+     @DeleteMapping("/{id}/songs")
+     public List<SongDTO> deleteSongs(@PathVariable long id){
+         Artist artist = artistService.getById(id);
+
+         return artist.getSongs()
+                 .stream()
+                 .map(song -> convertToSongDTO(songService.delete(song.getId())))
+                 .toList(); }
 
      @GetMapping("/{id}/songs")
      public List<SongDTO> getSongs(@PathVariable long id){

@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 
 public class ArtistDTO {
 
-    public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
+    public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private long id;
     private String name;
     private String alias;

@@ -16,16 +16,16 @@ public class MusicfyConfiguration {
         ModelMapper modelMapper = new ModelMapper();
 
         // Inizializza il property mapper per configurare il map di propietà "personalizzate"
-        TypeMap<Artist, ArtistDTO> propertyMapper = modelMapper.createTypeMap(Artist.class, ArtistDTO.class);
+        TypeMap<Artist, ArtistDTO> artistToDTOMapper = modelMapper.createTypeMap(Artist.class, ArtistDTO.class);
 
         // Definisco il mapping, passando al metodo addMapping
         // - il primo parametro il metodo "get.." della sorgente (Artist::getBirthDate)
         // - il secondo parametro il metodo "set.." della destinazione (ArtistDTO::convertDateToString)
-        propertyMapper.addMapping(Artist::getBirthDate, ArtistDTO::convertDateToString);
+        artistToDTOMapper.addMapping(Artist::getBirthDate, ArtistDTO::convertDateToString);
 
 
-        TypeMap<ArtistDTO,Artist> propertyMapperDTO = modelMapper.createTypeMap(ArtistDTO.class,Artist.class);
-        propertyMapperDTO.addMapping(ArtistDTO::convertBirthDate,Artist::setBirthDate);
+        TypeMap<ArtistDTO,Artist> DTOToArtistMapper = modelMapper.createTypeMap(ArtistDTO.class,Artist.class);
+        DTOToArtistMapper.addMapping(ArtistDTO::convertBirthDate,Artist::setBirthDate);
 
 
 
