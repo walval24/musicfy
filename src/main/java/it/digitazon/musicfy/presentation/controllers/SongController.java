@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/songs")
+@CrossOrigin(origins = "http://localhost:3000")
 public class SongController {
 
     @Autowired
@@ -84,6 +85,7 @@ public ArtistDTO getArtist (@PathVariable long id) {
 
     private SongDTO convertToDTO(Song song){
         return modelMapper.map(song, SongDTO.class);
+
 
     }
 
