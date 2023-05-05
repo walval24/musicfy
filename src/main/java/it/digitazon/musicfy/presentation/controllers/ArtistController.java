@@ -60,19 +60,25 @@ public class ArtistController {
 
         return convertToDTO(artistService.delete(id));
     }
-     @DeleteMapping ("/{id}")
-     public ArtistDTO deleteArtist(@PathVariable long id){
+    @DeleteMapping ("/{id}")
+    public ArtistDTO deleteArtist(@PathVariable long id){
+        Artist artist = artistService.getById(id);
+
+        artist.getSongs()
+                .forEach(song -> songService.delete(song.getId()));
+
         return convertToDTO(artistService.delete(id));
-     }
+    }
 
-     @DeleteMapping("/{id}/songs")
-     public List<SongDTO> deleteSongs(@PathVariable long id){
-         Artist artist = artistService.getById(id);
+    @DeleteMapping ("/{id}/songs")
+    public List<SongDTO> deleteSongs(@PathVariable long id) {
+        Artist artist = artistService.getById(id);
 
-         return artist.getSongs()
-                 .stream()
-                 .map(song -> convertToSongDTO(songService.delete(song.getId())))
-                 .toList(); }
+        return artist.getSongs()
+                .stream()
+                .map(song -> convertToSongDTO(songService.delete(song.getId())))
+                .toList();
+}
 
      @GetMapping("/{id}/songs")
      public List<SongDTO> getSongs(@PathVariable long id){
