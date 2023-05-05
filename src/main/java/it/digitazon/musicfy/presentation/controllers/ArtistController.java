@@ -50,15 +50,11 @@ public class ArtistController {
 
     @PutMapping("/{id}")
     public ArtistDTO updateArtist(@PathVariable long id, @RequestBody ArtistDTO updateArtist) {
-        Artist artist = artistService.getById(id);
-
-        artist.getSongs()
-
-                .forEach(song -> songService.delete(song.getId()));
+        Artist artist = convertToEntity(updateArtist);
+        artist = artistService.update(id,artist);
 
 
-
-        return convertToDTO(artistService.delete(id));
+        return convertToDTO(artist);
     }
     @DeleteMapping ("/{id}")
     public ArtistDTO deleteArtist(@PathVariable long id){
@@ -78,7 +74,8 @@ public class ArtistController {
                 .stream()
                 .map(song -> convertToSongDTO(songService.delete(song.getId())))
                 .toList();
-}
+    }
+
 
      @GetMapping("/{id}/songs")
      public List<SongDTO> getSongs(@PathVariable long id){
