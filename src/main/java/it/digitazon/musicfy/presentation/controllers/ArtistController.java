@@ -57,6 +57,7 @@ public class ArtistController {
                 .forEach(song -> songService.delete(song.getId()));
 
 
+
         return convertToDTO(artistService.delete(id));
     }
      @DeleteMapping ("/{id}")
