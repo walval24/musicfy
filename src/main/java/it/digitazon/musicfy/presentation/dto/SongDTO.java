@@ -11,6 +11,7 @@ public class SongDTO {
     private long idType;
     private boolean isDeleted;
     private double price;
+    private byte[] cover;
 
     private Date publishDate;
 
@@ -20,6 +21,14 @@ public class SongDTO {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public byte[] getCover() {
+        return cover;
+    }
+
+    public void setCover(byte[] cover) {
+        this.cover = cover;
     }
 
     public String getName() {

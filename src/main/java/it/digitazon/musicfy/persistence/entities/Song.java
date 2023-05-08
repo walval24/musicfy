@@ -27,6 +27,12 @@ public class Song {
     private double price;
     @Column( name = "publish_date" )
     private Date publishDate;
+
+    @Column (name= "cover", columnDefinition = "MEDIUMBLOB")
+    @Lob
+    private byte[] cover;
+
+
     @ManyToOne()
     @JoinColumn(name = "id_artist", nullable = false)
     //@OnDelete(action= OnDeleteAction.CASCADE)
@@ -36,6 +42,14 @@ public class Song {
     @JoinColumn(name = "id_type",nullable = false)
    // @OnDelete(action= OnDeleteAction.CASCADE)
     private Type type;
+
+    public byte[] getCover() {
+        return cover;
+    }
+
+    public void setCover(byte[] cover) {
+        this.cover = cover;
+    }
 
     public long getId() {
         return id;
